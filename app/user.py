@@ -68,10 +68,25 @@ def is_premium_user(user_id):
         premium_end_date = user['premium_end_date']
         if not premium_end_date:
             return False
-        
+
         utc_timezone = pytz.timezone('UTC')
         premium_end_datetime = datetime.utcfromtimestamp(int(premium_end_date)).replace(tzinfo=utc_timezone)
         return premium_end_datetime > datetime.utcnow().replace(tzinfo=utc_timezone)
     except Exception as e:
         logging.error(f"Error while checking if user {user_id} is premium: {e}")
         return False
+
+def get_user(user_id):
+    return {
+        "user_type": "premium",
+        # timestamp for 2099-12-31
+        "premium_end_date": 4102444800,
+        "llm_token_usage": 0,
+        "embedding_token_usage": 0,
+        "llm_token_limit": 100,
+        "embedding_token_limit": 100,
+        "message_count": 0,
+    }
+
+def update_message_token_usage(user_id, message_id, message_type, llm_token_usage=0, embedding_token_usage=0) -> bool:
+    return True
