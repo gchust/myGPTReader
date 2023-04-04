@@ -265,7 +265,22 @@ def handle_command_gpt_as_regex_master(ack, say, command):
 def handle_command_gpt_news(ack, say, command):
     ack()
     channel_id = command["channel_id"]
+    say(channel=channel_id,
+        text=f"daily news started",
+        blocks=[],
+        reply_broadcast=True
+    )
+    say(channel=channel_id,
+        text=f"daily news started2",
+        blocks=[],
+        reply_broadcast=True
+    )
     news = build_all_news_block()
+    say(channel=channel_id,
+        text=f"daily news end",
+        blocks=[],
+        reply_broadcast=True
+    )
     print(f"{len(news)} news items found ##############")
     for news_item in news:
         try:
