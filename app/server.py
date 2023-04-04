@@ -77,6 +77,12 @@ def slack_events():
     return slack_handler.handle(request)
 
 
+@slack_app.command("/slack/news")
+def news(ack, say):
+    ack()
+    schedule_news()
+
+
 def insert_space(text):
     # Handling the case between English words and Chinese characters
     text = re.sub(r'([a-zA-Z])([\u4e00-\u9fa5])', r'\1 \2', text)
