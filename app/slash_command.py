@@ -1,4 +1,7 @@
 import json
+import logging
+
+from app.daily_hot_news import build_all_news_block
 
 with open("app/data/prompt.json", "r") as f:
     prompt_data = json.load(f)
@@ -21,6 +24,7 @@ def register_slack_slash_commands(slack_app):
     slack_app.command("/gpt-as-it-architect")(handle_command_gpt_as_it_architect)
     slack_app.command("/gpt-as-fullstack-dev")(handle_command_gpt_as_fullstack_dev)
     slack_app.command("/gpt-as-regex-master")(handle_command_gpt_as_regex_master)
+    slack_app.command("/gtp-news")(handle_command_gpt_news)
 
 def get_command_name(command):
     return command["command"].replace("/", "")
@@ -257,3 +261,20 @@ def handle_command_gpt_as_regex_master(ack, say, command):
         blocks=blocks,
         reply_broadcast=True
     )
+
+def handle_command_gpt_news(ack, say, command):
+    ack()
+    channel_id = command["channel_id"]
+    news = build_all_news_block()
+    for news_item in news:
+        try:
+            r = say(
+                channel=channel_id,
+                text="🔥🔥🔥 Daily Hot News 🔥🔥🔥",
+                blocks=news_item,
+                reply_broadcast=True,
+                unfurl_links=False,
+            )
+            logging.info(r)
+        except Exception as e:
+            logging.error(e)
