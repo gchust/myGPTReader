@@ -16,7 +16,7 @@ def register_slack_slash_commands(slack_app):
     slack_app.command("/gpt-as-travel-guide")(handle_command_gpt_as_travel_guide)
     slack_app.command("/gpt-as-story-teller")(handle_command_gpt_as_story_teller)
     slack_app.command("/gpt-as-math-teacher")(handle_command_gpt_as_math_teacher)
-    slack_app.command("/gpt-as-ai-doctor")(handle_command_gpt_as_ai_doctor)
+    slack_app.command("/gpt-as-ai-doctor")(handle_command_gpt_news)
     slack_app.command("/gpt-as-financer")(handle_command_gpt_as_financer)
     slack_app.command("/gpt-as-investor")(handle_command_gpt_as_investor)
     slack_app.command("/gpt-as-encoverage-book")(handle_command_gpt_as_encoverage_book)
