@@ -5,11 +5,7 @@ kill_signal = "SIGINT"
 kill_timeout = 5
 
 [build]
-  builder = "paketobuildpacks/builder:full"
-  builtin = "python"
-
-[build.settings]
-  pythonbase = "3.9-slim-buster"
+  Dockerfile = "Dockerfile"
 
 [mount]
   source = "data"
@@ -17,6 +13,7 @@ kill_timeout = 5
 
 [env]
   PORT = "8080"
+  SWAP = "true"
 
 [[services]]
   internal_port = 8080
