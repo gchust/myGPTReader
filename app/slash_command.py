@@ -266,6 +266,7 @@ def handle_command_gpt_news(ack, say, command):
     ack()
     channel_id = command["channel_id"]
     news = build_all_news_block()
+    print(f"{len(news)} news items found ##############")
     for news_item in news:
         try:
             r = say(
